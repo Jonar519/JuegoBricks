@@ -1,5 +1,11 @@
 import pytest
-from src.grafos import *  # Importa el módulo desde el paquete src
+from src.grafos import tiene_ciclo
 
-def test_placeholder():
-    assert True  # TODO: Reemplazar con pruebas reales
+def test_ciclo_detectado():
+    # Secuencia con ciclo: 0 -> 1 -> 2 -> 3 -> 1 -> ...
+    secuencia_con_ciclo = [1, 2, 3, 1]
+    assert tiene_ciclo(secuencia_con_ciclo) is True
+
+def test_sin_ciclo():
+    secuencia_sin_ciclo = [1, 2, 3, None]  # Termina en None
+    assert tiene_ciclo(secuencia_sin_ciclo) is False
