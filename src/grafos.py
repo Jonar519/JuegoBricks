@@ -1,12 +1,28 @@
 def tiene_ciclo(secuencia):
-    if len(secuencia) <= 1:
+    if not secuencia:  # Si la lista está vacía
         return False
     
-    tortuga = liebre = secuencia[0]
+    tortuga = liebre = 0  # Empezamos en el primer índice (0)
+
     while True:
-        tortuga = secuencia[tortuga]  # Avanza 1 paso
-        liebre = secuencia[secuencia[liebre]]  # Avanza 2 pasos
+        # Verificar límites y None
+        if (
+            tortuga >= len(secuencia) or 
+            liebre >= len(secuencia) or
+            secuencia[tortuga] is None or
+            secuencia[liebre] is None
+        ):
+            return False
+
+        # Mover tortuga 1 paso
+        tortuga = secuencia[tortuga]
+        
+        # Mover liebre 2 pasos
+        liebre = secuencia[liebre]
+        if liebre >= len(secuencia) or secuencia[liebre] is None:
+            return False
+        liebre = secuencia[liebre]
+
+        # Detección de ciclo
         if tortuga == liebre:
             return True
-        if tortuga >= len(secuencia) or liebre >= len(secuencia):
-            return False
